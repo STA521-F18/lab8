@@ -21,7 +21,36 @@ library(knitr)
 For Lab we will explore ridge and lasso regression using the college application data.  
 _Example code based on ISLR Lab 6.6_
 
-Reading ISLR Chapter 6.
+Reading: ISLR Chapter 6.
+
+To try to simplify models, remove redundant varialbes and provide better RMSE over OLS, variable selection is often used. Recall AIC and BIC select models and coefficients by solving the optimization problem
+$$
+\| Y - X_M\beta_M\|^2 + \lambda p_M  
+$$
+
+The term $\lambda \, p_M$ can be thought of as an $l_0$ penalty, where $\| \beta\|+0^2 counts the number of non-zero parameters
+
+$$
+\| Y - X \beta \|^2 + \lambda \| \beta\|_0
+$$
+
+This is an NP-hard problem (i.e. there is not a polynomial-time algorithm).     Bayesian Variable selection also can be impacted by this computational complexity.
+
+Rather than solving the true selection problem instead consider solving 
+
+$$
+\| Y - X \beta \|^2 + \lambda \| \beta\|_2^2
+$$
+
+This is knows as ridge regression.  While the coefficients are never zero (except when $\lambda = \infty$) this constrains the coefficients from getting too large through the penalty, $\| \beta \|^2_2 = \sum_j \beta_j^2$.  Unstable coefficients that are large in absolute value is a consequence when there is high multicollinearity and the penality limits the growth of coefficients that increase in magnitude.
+
+By changing the penalty to the $l_1$ norm, 
+$$
+\| Y - X \beta \|^2 + \lambda \| \beta\|_1
+$$
+where $\| \beta \|_1 = \sum |\beta_j|$ we arrive at lasso or least absolute selection and shrinkage operator.  The penalty in Lasso also shrinks coeeficients by preventing them from growing too much, but the mode of the penalized likelihood often has solutions that set some of the $\beta_j$'s exactly to zero.
+
+
 
 ## Preliminaries
 
