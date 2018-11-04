@@ -36,7 +36,7 @@ College = College %>%
   select(c(-Accept, -Enroll))
 ```
 
-We are going to repeat parts of Lab 5 using Ridge Regression and Lasso. 
+As a team agree on the transformation of the response to use for the lab and add any additional predictors.  
 
 Set the random seed to your team number.
 ```{r}
@@ -61,7 +61,7 @@ rmse = function(ypred, ytest) {
 ```
 
 
-1.  As a team agree on the transformation of the response to use for the lab and fit the full model using OLS for the training data.  Obtain the predictions of `Apps` on the test data and the RMSE.
+1. Fit the full model using OLS for the training data.  Obtain the predictions of `Apps` on the test data and the RMSE. (modify for your response, i.e if you add `log(Apps)` to the dataframe, be sure to subtract `Apps` from the forumla RHS!)
 
 
 ```{r}
@@ -76,7 +76,7 @@ rmse(pred.ols, College[test,"Apps"])
 
 ## using `glmnet` to fir ridge and lass regression
 
-Create data for `glmnet` which does not use a formula argument.  The `model.matrix()` function from base `R` is particularly useful for creating x; not only does it produce a matrix corresponding to the  predictors but it also automatically transforms any qualitative variables into dummy variables. The latter property is important because `glmnet()` can only take numerical, quantitative inputs.  As an alternative, we can use `lm.ridge` from the `MASS` library.  Note `model.matrix` includes a column of ones for the intercept, so we will drop that with `[, -]` in first line.  Modify the code to calculate `y` base on your transformation.
+Create data for `glmnet` which does not use a formula argument.  The `model.matrix()` function from base `R` is particularly useful for creating x; not only does it produce a matrix corresponding to the  predictors but it also automatically transforms any qualitative variables into dummy variables. The latter property is important because `glmnet()` can only take numerical, quantitative inputs.  As an alternative, we can use `lm.ridge` from the `MASS` library.  Note `model.matrix` includes a column of ones for the intercept, so we will drop that with `[, -]` in first line.  Modify the code to calculate `y` based on your transformation and make sure you do not include `Apps` on the RHS of the formula!
 
 
 ```{r}
